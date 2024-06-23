@@ -11,15 +11,15 @@ release_path_map = {
 
 release_map = {}
 
-all_files = os.listdir('sublist')
-
 if __name__ == '__main__':
     print('Release all start')
     for map_key, map_value in release_path_map.items():
-        release_map[map_key] = [
+        tmp_path_list = [
             os.path.join(map_value['path'], file_this)
             for file_this in os.listdir(map_value['path'])
         ]
+        tmp_path_list.sort()
+        release_map[map_key] = tmp_path_list
     print(release_map)
     for release_key, release_value in release_map.items():
         release_file_str_list = [(
@@ -27,6 +27,7 @@ if __name__ == '__main__':
             f"description:{release_path_map[release_key]['description']}\n"
         )]
         for release_file_src in release_value:
+            print(f'loading {release_file_src} ...')
             with open(release_file_src, 'r', encoding='utf-8') as f:
                 release_file_str_this = f.read()
                 release_file_str_this = re.sub(r'^title:',       '@title:',       release_file_str_this)
