@@ -13,6 +13,7 @@ release_map = {}
 
 if __name__ == '__main__':
     print('Release all start')
+    print('Release map ...')
     for map_key, map_value in release_path_map.items():
         tmp_path_list = [
             os.path.join(map_value['path'], file_this)
@@ -20,14 +21,17 @@ if __name__ == '__main__':
         ]
         tmp_path_list.sort()
         release_map[map_key] = tmp_path_list
-    print(release_map)
+    print('Release map done')
     for release_key, release_value in release_map.items():
+        print(f'Release {release_key}.txt ...')
+        print(release_path_map[release_key]['title'])
+        print(release_path_map[release_key]['description'])
         release_file_str_list = [(
             f"title:{release_path_map[release_key]['title']}\n"
             f"description:{release_path_map[release_key]['description']}\n"
         )]
         for release_file_src in release_value:
-            print(f'loading {release_file_src} ...')
+            print(f'Loading {release_file_src} ...')
             with open(release_file_src, 'r', encoding='utf-8') as f:
                 release_file_str_this = f.read()
                 release_file_str_this = re.sub(r'^title:',       '@title:',       release_file_str_this)
@@ -35,4 +39,5 @@ if __name__ == '__main__':
                 release_file_str_list.append(release_file_str_this)
         with open(f'{release_key}.txt', 'w', encoding='utf-8') as f:
             f.write(('\n' * 6).join(release_file_str_list))
+        print(f'Release {release_key}.txt done')
     print('Release all done')
