@@ -4,7 +4,8 @@
 
 
 ## 使用方法指北
-使用以下地址一次性订阅全部愿望单   
+
+本仓库使用了CI自动构建，所以你可以使用以下地址一次性订阅全部愿望单   
 ```
 https://raw.githubusercontent.com/lunzhiPenxil/DIM-wish-list-for-lunzhiPenxil/main/all.txt
 ```
